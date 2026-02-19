@@ -9,6 +9,15 @@ type Repository struct {
 func NewRepository(db *sql.DB) *Repository {
 	return &Repository{db: db}
 }
+func (r *Repository) CreateTest(pekerjaan string, umur int, alamat string) (*Contoh, error){
+	var contoh Contoh
+	query := "INSERT INTO contoh (pekerjaan, umur, alamat) VALUES ($1, $2, $3) RETURNING pekerjaan, umur, alamat"
+	err := r.db.QueryRow(query,pekerjaan,umur,alamat).Scan(&contoh.Pekerjaan,contoh.Umur,&contoh.Alamat)
+	if err != nil {
+		return nil, err
+	}
+	return &contoh ,nil
+}
 
 func (r *Repository) GetAll() ([]User, error) {
 	rows, err := r.db.Query("SELECT id, name, email FROM users")
@@ -52,3 +61,4 @@ func (r *Repository) Delete(id int) error {
 	_, err := r.db.Exec("DELETE FROM users WHERE id = $1", id)
 	return err
 }
+

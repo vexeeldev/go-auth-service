@@ -32,10 +32,31 @@ func CreateTable() error {
 		created_at TIMESTAMP DEFAULT NOW()
 	)`
 	_, err := DB.Exec(query)
-	if err != nil {
+	return err
+}
+func CreateContoh() error {
+
+	query := `CREATE TABLE IF NOT EXISTS contoh (
+			id SERIAL PRIMARY KEY,
+			pekerjaan VARCHAR(100) NOT NULL,
+			umur INTEGER NOT NULL,
+			alamat VARCHAR(999) NOT NULL,
+			created_at TIMESTAMP DEFAULT NOW()
+	)`
+
+	_, err :=DB.Exec(query)
+
+	return err
+}
+
+func Migrate() error {
+	if err:= CreateTable(); err != nil {
 		return err
 	}
-	log.Println("✓ Table created")
+	if err := CreateContoh(); err != nil {
+		return err
+	}
+	log.Println("All table succes create")
 	return nil
 }
 

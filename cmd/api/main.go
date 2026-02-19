@@ -19,7 +19,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if err := database.CreateTable(); err != nil {
+	if err := database.Migrate(); err != nil{
 		log.Fatal(err)
 	}
 

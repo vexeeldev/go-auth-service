@@ -23,3 +23,4 @@ func (s *Service) GetUserByID(id int) (*User, error) {
 func (s *Service) DeleteUser(id int) error {
 	return s.repo.Delete(id)
 }
+
