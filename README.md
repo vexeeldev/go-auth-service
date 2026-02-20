@@ -15,3 +15,6 @@ Simple Go REST API - Framework: chi | Database: postgres
 - `POST /api/users` - Create user
 - `GET /api/users/{id}` - Get user
 - `DELETE /api/users/{id}` - Delete user
+- `PUT /api/users/{id}` -  Update user
+
+run : cd `project name`, `go run cmd/api/main.go`
