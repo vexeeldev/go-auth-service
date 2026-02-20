@@ -24,3 +24,8 @@ func (s *Service) DeleteUser(id int) error {
 	return s.repo.Delete(id)
 }
 
+func (s *Service) UpdateUser(user User) error {
+	return s.repo.Update(user)
+}
+
+

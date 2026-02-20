@@ -1,6 +1,9 @@
 package auth
 
-import "database/sql"
+import (
+	"database/sql"
+	"errors"
+)
 
 type Repository struct {
 	db *sql.DB
@@ -60,5 +63,24 @@ func (r *Repository) GetByID(id int) (*User, error) {
 func (r *Repository) Delete(id int) error {
 	_, err := r.db.Exec("DELETE FROM users WHERE id = $1", id)
 	return err
+}
+
+func (r *Repository) Update(user User) error {
+	res, err := r.db.Exec("UPDATE users SET name=$1,email=$2 WHERE id = $3", user.Name , user.Email,user.ID)
+	
+	if err != nil {
+		return err
+	}
+
+	rows, err := res.RowsAffected()
+
+	if err != nil {
+		return err
+	}
+
+	if rows == 0 {
+		return errors.New("users not found")
+	}
+	return  nil
 }
 
