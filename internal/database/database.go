@@ -48,9 +48,9 @@ func CreateContoh() error {
 
 	return err
 }
-// func CreateStatus() error {
-// 	query := 
-// }
+func CreateStatus() error {
+	query := 
+}
 
 func Migrate() error {
 	if err:= CreateTable(); err != nil {
